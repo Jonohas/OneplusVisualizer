@@ -3,4 +3,4 @@ The visualizer can be found on the steam workshop aswell. [here](https://steamco
 
 ![Screenshot](/preview.jpg)
 
-![Screenshot](/screenshots/screen.PNG)
+<a href="url"><img src="/preview.jpg" align="left" height="100" width="100" ></a>
