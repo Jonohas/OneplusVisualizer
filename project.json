@@ -1,0 +1,114 @@
+{
+	"contentrating" : "Everyone",
+	"description" : "Oneplus inspired wallpaper with audio visualizer",
+	"file" : "index.html",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"background_color" : 
+			{
+				"condition" : "background_type.value == 0",
+				"index" : 1,
+				"order" : 101,
+				"text" : "Background",
+				"type" : "color",
+				"value" : "0 0 0"
+			},
+			"background_image" : 
+			{
+				"condition" : "background_type.value == 1",
+				"fileType" : "image",
+				"index" : 2,
+				"order" : 102,
+				"text" : "Background Image",
+				"type" : "file",
+				"value" : ""
+			},
+			"background_type" : 
+			{
+				"index" : 0,
+				"options" : 
+				[
+					{
+						"label" : "Color",
+						"value" : "0"
+					},
+					{
+						"label" : "Image",
+						"value" : "1"
+					}
+				],
+				"order" : 100,
+				"text" : "Background Type",
+				"type" : "combo",
+				"value" : "0"
+			},
+			"clock_size" : 
+			{
+				"fraction" : true,
+				"index" : 3,
+				"max" : 15,
+				"min" : 5,
+				"order" : 103,
+				"precision" : 1,
+				"step" : 1,
+				"text" : "Clock size",
+				"type" : "slider",
+				"value" : 10
+			},
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0 0"
+			},
+			"stroke_width" : 
+			{
+				"fraction" : true,
+				"index" : 5,
+				"max" : 10,
+				"min" : 1,
+				"order" : 104,
+				"precision" : 1,
+				"step" : 1,
+				"text" : "Line width",
+				"type" : "slider",
+				"value" : 1
+			},
+			"visualizer_type" : 
+			{
+				"index" : 4,
+				"options" : 
+				[
+					{
+						"label" : "Lines",
+						"value" : "0"
+					},
+					{
+						"label" : "Spikes",
+						"value" : "1"
+					},
+					{
+						"label" : "Smooth spikes",
+						"value" : "2"
+					}
+				],
+				"order" : 105,
+				"text" : "Visualizer type",
+				"type" : "combo",
+				"value" : "0"
+			}
+		},
+		"supportsaudioprocessing" : true
+	},
+	"preview" : "preview.jpg",
+	"tags" : [ "Abstract" ],
+	"title" : "Oneplus inspired wallpaper by Jonahas",
+	"type" : "Web",
+	"version" : 10,
+	"visibility" : "public",
+	"workshopid" : "2251089928",
+	"workshopurl" : "steam://url/CommunityFilePage/2251089928"
+}
