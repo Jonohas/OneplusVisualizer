@@ -205,6 +205,7 @@ class Visualizer {
         let newAudioArr = [];
 
         data = this.normalize(data);
+        data = this.correctPinkNoise(data);
 
         for (var i = 0; i < data.length; i++) {
             if (data[i] < 0.001) {
