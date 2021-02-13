@@ -53,7 +53,7 @@ window.wallpaperPropertyListener = {
         if (properties.clock_size) {
             visualizer.divider = properties.clock_size.value;
             visualizer.update = 1;
-            visualizer.reload();
+            visualizer.updateProperties();
         }
 
         if (properties.stroke_width) {
@@ -63,6 +63,11 @@ window.wallpaperPropertyListener = {
 
         if (properties.visualizer_type) {
             visualizer.type = properties.visualizer_type.value;
+            visualizer.update = 1;
+        }
+
+        if (properties.normal) {
+            visualizer.normal = properties.normal.value;
             visualizer.update = 1;
         }
 

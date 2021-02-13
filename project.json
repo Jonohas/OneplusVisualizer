@@ -47,15 +47,23 @@
 			"clock_size" : 
 			{
 				"fraction" : true,
-				"index" : 3,
+				"index" : 4,
 				"max" : 15,
 				"min" : 5,
-				"order" : 103,
+				"order" : 104,
 				"precision" : 1,
 				"step" : 1,
 				"text" : "Clock size",
 				"type" : "slider",
 				"value" : 10
+			},
+			"normal" : 
+			{
+				"index" : 3,
+				"order" : 103,
+				"text" : "Normalize",
+				"type" : "bool",
+				"value" : false
 			},
 			"schemecolor" : 
 			{
@@ -70,7 +78,7 @@
 				"index" : 5,
 				"max" : 10,
 				"min" : 1,
-				"order" : 104,
+				"order" : 105,
 				"precision" : 1,
 				"step" : 1,
 				"text" : "Line width",
@@ -79,7 +87,7 @@
 			},
 			"visualizer_type" : 
 			{
-				"index" : 4,
+				"index" : 6,
 				"options" : 
 				[
 					{
@@ -95,7 +103,7 @@
 						"value" : "2"
 					}
 				],
-				"order" : 105,
+				"order" : 106,
 				"text" : "Visualizer type",
 				"type" : "combo",
 				"value" : "0"
