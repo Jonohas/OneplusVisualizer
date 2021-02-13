@@ -66,10 +66,10 @@ class Visualizer {
         let timeArr = [hours, minutes, seconds, millis]; 
 
         this.hourArm(timeArr);
+        this.drawDate(); // minute pointer over the text
         this.minuteArm(timeArr);
         this.secondsDot(timeArr);
         this.centerDot();
-        this.drawDate();
     }
 
     hourArm(time) {
@@ -80,6 +80,8 @@ class Visualizer {
         this.ctx.moveTo(this.cx, this.cy);
         this.ctx.lineTo(this.cx + Math.cos(hoursAngle) * this.hr, this.cy + Math.sin(hoursAngle) * this.hr);
         this.ctx.strokeStyle = 'rgb(255,0,0)';
+
+        this.ctx.lineWidth = 2;
         this.ctx.stroke();
     }
 
@@ -91,6 +93,8 @@ class Visualizer {
         this.ctx.moveTo(this.cx, this.cy);
         this.ctx.lineTo(this.cx + Math.cos(minutesAngle) * this.mr, this.cy + Math.sin(minutesAngle) * this.mr);
         this.ctx.strokeStyle = 'rgb(255,255,255)';
+        
+        this.ctx.lineWidth = 2;
         this.ctx.stroke();
     }
 
@@ -113,6 +117,22 @@ class Visualizer {
 
     drawDate() {
 
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
+        const time = this.time();
+        const month = months[time.getMonth()];
+        const day = time.getDate();
+
+        const string = `${month} ${day}`;
+        
+        this.ctx.font = "13px Storopia";
+        this.ctx.fillStyle = 'rgb(255,255,255)';
+        this.ctx.fillText(string, this.cx - this.radius * 0.725, this.cy + 5);
+
+        this.ctx.beginPath();
+        this.ctx.arc(this.cx - this.radius * 0.8, this.cy, 3, 0, 360);
+        this.ctx.fillStyle = 'rgb(255,0,0)';
+
+        this.ctx.fill();
     }
 
     calculatePoint(radius, angle, cx, cy) { //cx = center x value, cy = center y value
