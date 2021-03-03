@@ -1,21 +1,23 @@
 @font-face {
-    font-family: 'Storopia';
-    src: url(../fonts/Storopia.ttf);
+  font-family: "Storopia";
+  src: url(../fonts/Storopia.ttf);
 }
 
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 body {
-    overflow: hidden;
-    height: 100vh;
-    width: 100vw;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+
+  background: cover;
 }
 #canvas {
-    width: 100%;
-    height: 100%;
-    position: absolute;
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
