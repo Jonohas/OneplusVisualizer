@@ -1,5 +1,6 @@
 'use strict';
 
+
 class Visualizer {
     constructor(fps = 60) {
         this.fps = fps + 30;
@@ -28,6 +29,7 @@ class Visualizer {
             1.8491987941428,1.9238418849406,2.0141596921333,2.0786429508827,2.1575522518646,
             2.2196355526005,2.2660112509705,2.320762171749,2.3574848254513,2.3986127976537,	
             2.4043566176474,2.4280476777842,2.3917477397336,2.4032522546622,2.3614180150678];
+
     }
 
     updateProperties() {
@@ -79,7 +81,7 @@ class Visualizer {
         this.ctx.beginPath();
         this.ctx.moveTo(this.cx, this.cy);
         this.ctx.lineTo(this.cx + Math.cos(hoursAngle) * this.hr, this.cy + Math.sin(hoursAngle) * this.hr);
-        this.ctx.strokeStyle = 'rgb(255,0,0)';
+        this.ctx.strokeStyle = this.accentColor;
 
         this.ctx.lineWidth = 2;
         this.ctx.stroke();
@@ -130,7 +132,7 @@ class Visualizer {
 
         this.ctx.beginPath();
         this.ctx.arc(this.cx - this.radius * 0.8, this.cy, 3, 0, 360);
-        this.ctx.fillStyle = 'rgb(255,0,0)';
+        this.ctx.fillStyle = this.accentColor;
 
         this.ctx.fill();
     }

@@ -50,6 +50,16 @@ window.wallpaperPropertyListener = {
             document.querySelector('body').style.backgroundColor = window.color;
         }
 
+        if (properties.accent_color) {
+            let color = properties.accent_color.value;
+            let r,g,b;
+            r = parseFloat(color.split(" ")[0] * 255);
+            g = parseFloat(color.split(" ")[1] * 255);
+            b = parseFloat(color.split(" ")[2] * 255);
+
+            visualizer.accentColor = `rgba(${r},${g},${b},1)`;
+        }
+
         if (properties.clock_size) {
             visualizer.divider = properties.clock_size.value;
             visualizer.update = 1;
