@@ -43,87 +43,15 @@
 				"text" : "Background Type",
 				"type" : "combo",
 				"value" : "0"
-			},
-			"accent_color" : 
-			{
-				"index" : 3,
-				"order" : 101,
-				"text" : "Background",
-				"type" : "color",
-				"value" : "0 0 0"
-			},
-			"clock_size" : 
-			{
-				"fraction" : true,
-				"index" : 5,
-				"max" : 15,
-				"min" : 5,
-				"order" : 104,
-				"precision" : 1,
-				"step" : 1,
-				"text" : "Clock size",
-				"type" : "slider",
-				"value" : 10
-			},
-			"normal" : 
-			{
-				"index" : 4,
-				"order" : 103,
-				"text" : "Normalize",
-				"type" : "bool",
-				"value" : false
-			},
-			"schemecolor" : 
-			{
-				"order" : 0,
-				"text" : "ui_browse_properties_scheme_color",
-				"type" : "color",
-				"value" : "0 0 0"
-			},
-			"stroke_width" : 
-			{
-				"fraction" : true,
-				"index" : 6,
-				"max" : 10,
-				"min" : 1,
-				"order" : 105,
-				"precision" : 1,
-				"step" : 1,
-				"text" : "Line width",
-				"type" : "slider",
-				"value" : 1
-			},
-			"visualizer_type" : 
-			{
-				"index" : 7,
-				"options" : 
-				[
-					{
-						"label" : "Lines",
-						"value" : "0"
-					},
-					{
-						"label" : "Spikes",
-						"value" : "1"
-					},
-					{
-						"label" : "Smooth spikes",
-						"value" : "2"
-					}
-				],
-				"order" : 106,
-				"text" : "Visualizer type",
-				"type" : "combo",
-				"value" : "0"
 			}
 		},
 		"supportsaudioprocessing" : true
 	},
 	"preview" : "preview.jpg",
 	"tags" : [ "Abstract" ],
-	"title" : "Oneplus visualizer",
+	"title" : "OneplusVisualizerV2",
 	"type" : "web",
-	"version" : 11,
+	"version" : 2,
 	"visibility" : "public",
 	"workshopid" : "2251089928",
 	"workshopurl" : "steam://url/CommunityFilePage/2251089928"

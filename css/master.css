@@ -15,6 +15,7 @@ body {
   width: 100vw;
 
   background: cover;
+  background-color: black;
 }
 #canvas {
   width: 100%;
