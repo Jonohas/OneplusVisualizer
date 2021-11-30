@@ -6,6 +6,14 @@
 	{
 		"properties" : 
 		{
+			"accent_color" : 
+			{
+				"index" : 2,
+				"order" : 102,
+				"text" : "Accent color",
+				"type" : "color",
+				"value" : "1 0 0"
+			},
 			"background_color" : 
 			{
 				"condition" : "background_type.value == 0",
@@ -19,8 +27,8 @@
 			{
 				"condition" : "background_type.value == 1",
 				"fileType" : "image",
-				"index" : 2,
-				"order" : 102,
+				"index" : 3,
+				"order" : 103,
 				"text" : "Background Image",
 				"type" : "file",
 				"value" : ""
@@ -43,15 +51,101 @@
 				"text" : "Background Type",
 				"type" : "combo",
 				"value" : "0"
+			},
+			"clock" : 
+			{
+				"index" : 6,
+				"order" : 106,
+				"text" : "Enable clock",
+				"type" : "bool",
+				"value" : false
+			},
+			"clock_size" : 
+			{
+				"fraction" : true,
+				"index" : 7,
+				"max" : 15,
+				"min" : 5,
+				"order" : 107,
+				"precision" : 1,
+				"step" : 1,
+				"text" : "Clock size",
+				"type" : "slider",
+				"value" : 8
+			},
+			"normal" : 
+			{
+				"index" : 4,
+				"order" : 104,
+				"text" : "Normalize",
+				"type" : "bool",
+				"value" : false
+			},
+			"normal_amount" : 
+			{
+				"condition" : "normal.value == true",
+				"fraction" : true,
+				"index" : 5,
+				"max" : 100,
+				"min" : 0,
+				"order" : 105,
+				"precision" : 1,
+				"step" : 1,
+				"text" : "Normalize amount",
+				"type" : "slider",
+				"value" : 30
+			},
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0 0"
+			},
+			"stroke_width" : 
+			{
+				"fraction" : true,
+				"index" : 8,
+				"max" : 10,
+				"min" : 1,
+				"order" : 108,
+				"precision" : 1,
+				"step" : 1,
+				"text" : "Line width",
+				"type" : "slider",
+				"value" : 3
+			},
+			"visualizer_type" : 
+			{
+				"index" : 9,
+				"options" : 
+				[
+					{
+						"label" : "Lines",
+						"value" : "0"
+					},
+					{
+						"label" : "Spikes",
+						"value" : "1"
+					},
+					{
+						"label" : "Smooth spikes",
+						"value" : "2"
+					}
+				],
+				"order" : 109,
+				"text" : "Visualizer type",
+				"type" : "combo",
+				"value" : "0"
 			}
 		},
 		"supportsaudioprocessing" : true
 	},
 	"preview" : "preview.jpg",
 	"tags" : [ "Abstract" ],
-	"title" : "OneplusVisualizerV2",
+	"title" : "Oneplus visualizer",
 	"type" : "web",
-	"version" : 2,
+	"version" : 3,
 	"visibility" : "public",
 	"workshopid" : "2251089928",
 	"workshopurl" : "steam://url/CommunityFilePage/2251089928"
