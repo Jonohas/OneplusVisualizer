@@ -1,19 +1,123 @@
 'use strict';
 
+const minimalism_2_values = {
+    name: "minimalism_2",
+    hours: {
+        name: 'hours',
+        type: "arm",
+        radius_multiplier: 0.4,
+        width: 2,
+        color: 'accent'
+    },
+    minutes: {
+        name: 'minutes',
+        type: "arm",
+        radius_multiplier: 0.6,
+        width: 2,
+        color: "rgb(255,255,255)"
+    },
+    seconds: {
+        name: 'seconds',
+        type: "dot",
+        size: 2,
+        radius_multiplier: 0.9,
+        color: "rgb(255,255,255)"
+    },
+    centerDot: {
+        type: "dot",
+        useSize: true,
+        size: 2,
+        radius_multiplier: 0,
+        color: "rgb(255,255,255)"
+    },
+    border: {
+        color: "rgb(68,68,68)",
+        width: 6
+    },
+    background: {
+        color: "rgb(0,0,0)"
+    },
+    clock: {
+        diameter: 1.7
+    },
+    drawDate: true
+};
+const minimalism_2_z_index = [minimalism_2_values.hours, minimalism_2_values.minutes, minimalism_2_values.seconds, minimalism_2_values.centerDot];
+const minimalism_2 = {};
+Object.assign(minimalism_2, minimalism_2_values);
+Object.assign(minimalism_2, {z_index:minimalism_2_z_index});
+
+const minimalism_1_values = {
+    name: "minimalism_1",
+    hours: {
+        name: 'hours',
+        type: "dot",
+        size: 6,
+        radius_multiplier: 0.4,
+        width: 2,
+        color: 'accent'
+    },
+    minutes: {
+        name: 'minutes',
+        type: "arm",
+        radius_multiplier: 0.6,
+        width: 4,
+        color: "rgb(255,255,255)",
+        rounded: true
+    },
+    seconds: {
+        name: 'seconds',
+        type: "none",
+        size: 2,
+        radius_multiplier: 0.9,
+        color: "rgb(255,255,255)"
+    },
+    centerDot: {
+        name: 'centerDot',
+        type: "dot",
+        useSize: false,
+        size: 20,
+        radius_multiplier: 0.4,
+        color: "rgb(40,40,40)"
+    },
+    border: {
+        color: "rgb(68,68,68)",
+        width: 6
+    },
+    background: {
+        color: "rgb(0,0,0)"
+    },
+    clock: {
+        diameter: 1.7
+    },
+    drawDate: false
+};
+const minimalism_1_z_index = [minimalism_1_values.centerDot, minimalism_1_values.hours, minimalism_1_values.minutes];
+const minimalism_1 = {};
+Object.assign(minimalism_1, minimalism_1_values);
+Object.assign(minimalism_1, {z_index:minimalism_1_z_index});
+
+const clockFaces = [
+    minimalism_1,
+    minimalism_2
+];
+
+
 
 class Visualizer {
     constructor(fps = 60) {
         this.fps = fps + 30;
 
         this.update = 0;
-        this.divider = 2;
-        this.stroke_width = 1;
+        this.divider = 8;
+        this.stroke_width = 3;
         this.padding = 10;
 
         this.normal = 0;
         this.normal_amount = 0.3;
 
-        this.clockOn = false;
+        this.clockOn = true;
+        this.clockFace = minimalism_1;
 
         this.gaussianArr = [.242, .599, .242];
 
@@ -23,7 +127,17 @@ class Visualizer {
 
         this.peakValue = 1;
 
+        this.accentColor = `rgba(255,0,0,1)`;
+    }
 
+    setClockFace(name) {
+        for (const clockface of clockFaces) {
+            if (clockface.name == name) {
+                console.log(this.clockFace);
+                this.clockFace = clockface;
+                console.log(this.clockFace);
+            }
+        }
     }
 
     updateProperties() {
@@ -32,10 +146,10 @@ class Visualizer {
         this.distance = this.radius + this.padding;
 
         
-        this.hr = this.radius * 0.4; // Hour radius
-        this.mr = this.radius * 0.6; // Minute radius
-        this.sr = this.radius * 0.9; // Second radius
-        this.cd = this.radius * 1.7; // Clock diameter
+        this.hr = this.radius * this.clockFace.hours.radius_multiplier; // Hour radius
+        this.mr = this.radius * this.clockFace.minutes.radius_multiplier;; // Minute radius
+        this.sr = this.radius * this.clockFace.seconds.radius_multiplier;; // Second radius
+        this.cd = this.radius * this.clockFace.clock.diameter; // Clock diameter
     }
 
     time() {
@@ -45,9 +159,9 @@ class Visualizer {
     clock() {
         this.ctx.beginPath();
         this.ctx.arc(this.cx, this.cy, this.radius, 0, 360);
-        this.ctx.fillStyle = 'rgb(0,0,0)';
-        this.ctx.strokeStyle = "rgb(68,68,68)";
-        this.ctx.lineWidth = 6;
+        this.ctx.fillStyle = this.clockFace.background.color;
+        this.ctx.strokeStyle = this.clockFace.border.color;
+        this.ctx.lineWidth = this.clockFace.border.width;
         this.ctx.fill();
         this.ctx.stroke();
         this.ctx.lineWidth = 1;
@@ -61,55 +175,71 @@ class Visualizer {
 
         let timeArr = [hours, minutes, seconds, millis]; 
 
-        this.hourArm(timeArr);
-        this.drawDate(); // minute pointer over the text
-        this.minuteArm(timeArr);
-        this.secondsDot(timeArr);
-        this.centerDot();
+        if (this.clockFace.drawDate) {
+            this.drawDate();
+        }
+
+        for (const item of this.clockFace.z_index) {
+            this.armdot(timeArr, item);
+        }
     }
 
-    hourArm(time) {
-        let hours = time[0] + (time[1] / 60 ) + (time[2] / 3600) + (time[3] / 3600000);
-        let hoursAngle = hours / 12 * ( 2 * Math.PI) - (Math.PI / 2); // hours angle in radians
+    armdot(time, value) {
+        let timeMeasurement, angleRad;
 
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.cx, this.cy);
-        this.ctx.lineTo(this.cx + Math.cos(hoursAngle) * this.hr, this.cy + Math.sin(hoursAngle) * this.hr);
-        this.ctx.strokeStyle = this.accentColor;
+        if (value.name == 'hours') {
+            timeMeasurement = time[0] + (time[1] / 60 ) + (time[2] / 3600) + (time[3] / 3600000);
+            angleRad = timeMeasurement / 12 * ( 2 * Math.PI) - (Math.PI / 2);
+        } else if (value.name == 'minutes') {
+            timeMeasurement = time[1] + (time[2] / 60) + (time[3] / 60000);
+            angleRad = timeMeasurement / 60 * ( 2 * Math.PI) - (Math.PI / 2);
+        } else if (value.name == 'seconds') {
+            timeMeasurement = time[2] + (time[3] / 1000);
+            angleRad = timeMeasurement / 60 * ( 2 * Math.PI) - (Math.PI / 2);
+        }
 
-        this.ctx.lineWidth = 2;
-        this.ctx.stroke();
+
+        if (value.type == 'arm') {
+
+            if (value.rounded) {
+                this.ctx.beginPath();
+                this.ctx.arc(this.cx, this.cy, value.width / 2, 0, Math.PI * 2);
+                this.ctx.fillStyle = (value.color == 'accent') ? this.accentColor : value.color;
+                this.ctx.fill();
+            }
+
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.cx, this.cy);
+            this.ctx.lineTo(this.cx + Math.cos(angleRad) * (this.radius * value.radius_multiplier), this.cy + Math.sin(angleRad) * (this.radius * value.radius_multiplier));
+            this.ctx.strokeStyle = (value.color == 'accent') ? this.accentColor : value.color;
+            this.ctx.lineWidth = value.width;
+            this.ctx.stroke();
+
+            if (value.rounded) {
+                this.ctx.beginPath();
+                this.ctx.arc(this.cx + Math.cos(angleRad) * (this.radius * value.radius_multiplier), this.cy + Math.sin(angleRad) * (this.radius * value.radius_multiplier), value.width / 2, 0, Math.PI * 2);
+                this.ctx.fillStyle = (value.color == 'accent') ? this.accentColor : value.color;
+                this.ctx.fill();
+            }
+
+        } else if (value.type =='dot') {
+            this.ctx.beginPath();
+
+            if (value.name == 'centerDot') {
+                if (value.useSize) {
+                    this.ctx.arc(this.cx, this.cy, value.size, 0, 360);
+                } else {
+                    this.ctx.arc(this.cx, this.cy, (this.radius * value.radius_multiplier), 0, 360);
+                }
+            } else {
+                this.ctx.arc(this.cx + Math.cos(angleRad) * (this.radius * value.radius_multiplier), this.cy + Math.sin(angleRad) * (this.radius * value.radius_multiplier), value.size, 0, 360);
+            }
+
+            this.ctx.fillStyle = (value.color == 'accent') ? this.accentColor : value.color;
+            this.ctx.fill();
+        }
     }
 
-    minuteArm(time) {
-        let minutes = time[1] + (time[2] / 60) + (time[3] / 60000); 
-        let minutesAngle = minutes / 60 * ( 2 * Math.PI) - (Math.PI / 2); // minutes angle in radians
-
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.cx, this.cy);
-        this.ctx.lineTo(this.cx + Math.cos(minutesAngle) * this.mr, this.cy + Math.sin(minutesAngle) * this.mr);
-        this.ctx.strokeStyle = 'rgb(255,255,255)';
-        
-        this.ctx.lineWidth = 2;
-        this.ctx.stroke();
-    }
-
-    secondsDot(time) {
-        let seconds = time[2] + (time[3] / 1000);
-        let secondsAngle = seconds / 60 * ( 2 * Math.PI) - (Math.PI / 2);
-
-        this.ctx.beginPath();
-        this.ctx.arc(this.cx + Math.cos(secondsAngle) * this.sr, this.cy + Math.sin(secondsAngle) * this.sr, 2, 0, 360);
-        this.ctx.fillStyle = 'rgb(255,255,255)';
-        this.ctx.fill();
-    }
-
-    centerDot() {
-        this.ctx.beginPath();
-        this.ctx.arc(this.cx, this.cy, 2, 0, 360);
-        this.ctx.fillStyle = 'rgb(255,255,255)';
-        this.ctx.fill();
-    }
 
     drawDate() {
 
@@ -140,7 +270,6 @@ class Visualizer {
     audioListener(audioArray) {
         this.audioArray = this.changeArray(audioArray);
         this.lastArray = this.audioArray;
-    
     }
 
     smooth(array) {
@@ -213,12 +342,23 @@ class Visualizer {
         // console.log(this.audioArray instanceof Array);
         for (const i in this.audioArray) {
             const element = this.audioArray[i];
+
+            this.ctx.beginPath();
+            this.ctx.arc(element[0].x, element[0].y, this.stroke_width / 2, 0, Math.PI * 2);
+            this.ctx.fillStyle = 'rgb(255,255,255)';
+            this.ctx.fill();
+
             this.ctx.beginPath();
             this.ctx.moveTo(element[0].x, element[0].y);
             this.ctx.lineTo(element[1].x, element[1].y);
             this.ctx.strokeStyle = 'rgb(255,255,255)';
             this.ctx.lineWidth = this.stroke_width;
             this.ctx.stroke();
+
+            this.ctx.beginPath();
+            this.ctx.arc(element[1].x, element[1].y, this.stroke_width / 2, 0, Math.PI * 2);
+            this.ctx.fillStyle = 'rgb(255,255,255)';
+            this.ctx.fill();
         }
     }
 
@@ -356,8 +496,6 @@ class Visualizer {
         this.canvas.height = this.canvas.scrollHeight;
         this.cx = this.canvas.width / 2;
         this.cy = this.canvas.height / 2;
-        
-        console.log(this.cx,this.cy)
 
         this.calculateMillis();
 

@@ -1,6 +1,6 @@
 {
 	"contentrating" : "Everyone",
-	"description" : "Oneplus inspired wallpaper with audio visualizer",
+	"description" : "Oneplus inspired wallpaper with audio visualizer.\n\nFeatures: Custom accent color, changeable size of the clock, normalization, custom background image or color.\n\nMultiple wachfaces\n\nLeave a comment for any suggestions",
 	"file" : "index.html",
 	"general" : 
 	{
@@ -58,7 +58,26 @@
 				"order" : 106,
 				"text" : "Enable clock",
 				"type" : "bool",
-				"value" : false
+				"value" : true
+			},
+			"clockFace" : 
+			{
+				"index" : 10,
+				"options" : 
+				[
+					{
+						"label" : "Minimalism 1",
+						"value" : "minimalism_1"
+					},
+					{
+						"label" : "Minimalism 2",
+						"value" : "minimalism_2"
+					}
+				],
+				"order" : 107,
+				"text" : "Clock face",
+				"type" : "combo",
+				"value" : "minimalism_1"
 			},
 			"clock_size" : 
 			{
@@ -66,7 +85,7 @@
 				"index" : 7,
 				"max" : 15,
 				"min" : 5,
-				"order" : 107,
+				"order" : 108,
 				"precision" : 1,
 				"step" : 1,
 				"text" : "Clock size",
@@ -108,7 +127,7 @@
 				"index" : 8,
 				"max" : 10,
 				"min" : 1,
-				"order" : 108,
+				"order" : 109,
 				"precision" : 1,
 				"step" : 1,
 				"text" : "Line width",
@@ -133,7 +152,7 @@
 						"value" : "2"
 					}
 				],
-				"order" : 109,
+				"order" : 110,
 				"text" : "Visualizer type",
 				"type" : "combo",
 				"value" : "0"
@@ -145,7 +164,7 @@
 	"tags" : [ "Abstract" ],
 	"title" : "Oneplus visualizer",
 	"type" : "web",
-	"version" : 3,
+	"version" : 4,
 	"visibility" : "public",
 	"workshopid" : "2251089928",
 	"workshopurl" : "steam://url/CommunityFilePage/2251089928"

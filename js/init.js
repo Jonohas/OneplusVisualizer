@@ -1,3 +1,4 @@
+
 const visualizer = new Visualizer();
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -25,6 +26,12 @@ window.wallpaperPropertyListener = {
                 body.style.backgroundSize = "cover";
                 body.style.backgroundRepeat = "no-repeat";
             }
+            visualizer.update = 1;
+        }
+
+        if (properties.clockFace) {
+            visualizer.setClockFace(properties.clockFace.value).bind(visualizer);
+            visualizer.update = 1;
         }
 
         if (properties.background_image) {
@@ -37,6 +44,7 @@ window.wallpaperPropertyListener = {
                 window.image = image;
                 body.style.backgroundImage = `url(${window.image.src})`;
             };
+            visualizer.update = 1;
         }
         // set background
         if (properties.background_color) {
@@ -49,6 +57,7 @@ window.wallpaperPropertyListener = {
 
             window.color = `rgba(${r},${g},${b},1)`;
             document.querySelector('body').style.backgroundColor = window.color;
+            visualizer.update = 1;
         }
 
         if (properties.accent_color) {
@@ -59,6 +68,7 @@ window.wallpaperPropertyListener = {
             b = parseFloat(color.split(" ")[2] * 255);
 
             visualizer.accentColor = `rgba(${r},${g},${b},1)`;
+            visualizer.update = 1;
         }
 
         if (properties.clock_size) {
